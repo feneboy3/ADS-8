@@ -9,6 +9,7 @@ void printFreq(BST<std::string>& tree);
 int main() {
     BST<std::string> tree;
 
+    // Автотесты GitHub запускаются так, что видят папку src
     makeTree(tree, "src/war_peace.txt");
 
     printFreq(tree);
