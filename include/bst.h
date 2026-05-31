@@ -7,21 +7,18 @@
 template <typename T>
 class BST {
 public:
-    // Структура узла дерева
     struct Node {
-        T value;       // Само слово
-        int count;     // Счетчик повторений
+        T value;
+        int count;
         Node* left;
         Node* right;
         
-        // Конструктор узла
         Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
     };
 
 private:
     Node* root;
 
-    // Рекурсивный помощник для вставки
     Node* insertHelper(Node* node, T val) {
         if (node == nullptr) {
             return new Node(val);
@@ -31,13 +28,11 @@ private:
         } else if (val > node->value) {
             node->right = insertHelper(node->right, val);
         } else {
-            // Если слово уже есть в дереве, просто увеличиваем счетчик
             node->count++;
         }
         return node;
     }
 
-    // Рекурсивный помощник для измерения глубины
     int depthHelper(Node* node) {
         if (node == nullptr) return 0;
         int leftDepth = depthHelper(node->left);
@@ -45,7 +40,6 @@ private:
         return (leftDepth > rightDepth ? leftDepth : rightDepth) + 1;
     }
 
-    // Рекурсивный помощник для поиска
     bool searchHelper(Node* node, T val) {
         if (node == nullptr) return false;
         if (node->value == val) return true;
@@ -53,7 +47,6 @@ private:
         return searchHelper(node->right, val);
     }
 
-    // Очистка памяти
     void destroyHelper(Node* node) {
         if (node != nullptr) {
             destroyHelper(node->left);
@@ -68,7 +61,6 @@ public:
         destroyHelper(root);
     }
 
-    // Основные методы, которые мы вызываем снаружи
     void insert(T val) {
         root = insertHelper(root, val);
     }
@@ -81,7 +73,6 @@ public:
         return searchHelper(root, val);
     }
 
-    // Метод для получения корня (понадобится для обхода в alg.cpp)
     Node* getRoot() {
         return root;
     }
