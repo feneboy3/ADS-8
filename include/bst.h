@@ -12,7 +12,7 @@ public:
         int count;
         Node* left;
         Node* right;
-        
+
         Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
     };
 
