@@ -1,9 +1,9 @@
 // Copyright 2021 NNTU-CS
-#include <iostream>
+#include <algorithm>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include "bst.h"
 
 void makeTree(BST<std::string>& tree, const char* filename) {
@@ -39,7 +39,8 @@ void makeTree(BST<std::string>& tree, const char* filename) {
     file.close();
 }
 
-void traverse(BST<std::string>::Node* node, std::vector<BST<std::string>::Node*>* nodes) {
+void traverse(BST<std::string>::Node* node,
+              std::vector<BST<std::string>::Node*>* nodes) {
     if (node == nullptr) return;
     traverse(node->left, nodes);
     nodes->push_back(node);
