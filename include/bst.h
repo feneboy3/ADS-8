@@ -6,17 +6,17 @@
 
 template <typename T>
 class BST {
-public:
+ public:
     struct Node {
         T value;
         int count;
         Node* left;
         Node* right;
 
-        Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
+        explicit Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
     };
 
-private:
+ private:
     Node* root;
 
     Node* insertHelper(Node* node, T val) {
@@ -40,9 +40,9 @@ private:
         return (leftDepth > rightDepth ? leftDepth : rightDepth) + 1;
     }
 
-    bool searchHelper(Node* node, T val) {
-        if (node == nullptr) return false;
-        if (node->value == val) return true;
+    int searchHelper(Node* node, T val) {
+        if (node == nullptr) return 0;
+        if (node->value == val) return node->count;
         if (val < node->value) return searchHelper(node->left, val);
         return searchHelper(node->right, val);
     }
@@ -55,7 +55,7 @@ private:
         }
     }
 
-public:
+ public:
     BST() : root(nullptr) {}
     ~BST() {
         destroyHelper(root);
@@ -69,7 +69,7 @@ public:
         return depthHelper(root);
     }
 
-    bool search(T val) {
+    int search(T val) {
         return searchHelper(root, val);
     }
 
