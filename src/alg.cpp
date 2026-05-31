@@ -4,27 +4,16 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "bst.h"
 
-void makeTree(BST<std::string>& tree, const char* filename) {
-    std::ifstream file;
-    
-    // Перебираем все возможные варианты путей, где GitHub может прятать книгу
-    file.open(filename);
-    if (!file.is_open()) file.open(std::string("../") + filename);
-    if (!file.is_open()) file.open(std::string("../../") + filename);
-    if (!file.is_open()) file.open(std::string("../../../") + filename);
-    if (!file.is_open()) file.open("src/war_peace.txt");
-    if (!file.is_open()) file.open("../src/war_peace.txt");
-    if (!file.is_open()) file.open("../../src/war_peace.txt");
-    if (!file.is_open()) file.open("../../../src/war_peace.txt");
-
-    if (!file.is_open()) {
+void makeTree(BST<std::string>& tree, const char* filename) {  // NOLINT
+    std::ifstream file(filename);
+    if (!file) {
         return;
     }
 
-    std::string current_word = "";
-
+    std::string current_word;
     while (!file.eof()) {
         int ch = file.get();
         if (ch == EOF) break;
@@ -37,7 +26,7 @@ void makeTree(BST<std::string>& tree, const char* filename) {
         } else {
             if (!current_word.empty()) {
                 tree.insert(current_word);
-                current_word = "";
+                current_word.clear();
             }
         }
     }
