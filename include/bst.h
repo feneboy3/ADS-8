@@ -40,9 +40,9 @@ class BST {
         return (leftDepth > rightDepth ? leftDepth : rightDepth) + 1;
     }
 
-    bool searchHelper(Node* node, T val) {
-        if (node == nullptr) return false;
-        if (node->value == val) return true;
+    int searchHelper(Node* node, T val) {
+        if (node == nullptr) return 0;
+        if (node->value == val) return node->count;
         if (val < node->value) return searchHelper(node->left, val);
         return searchHelper(node->right, val);
     }
@@ -70,7 +70,7 @@ class BST {
         return d > 0 ? d - 1 : 0;
     }
 
-    bool search(T val) {
+    int search(T val) {
         return searchHelper(root, val);
     }
 
