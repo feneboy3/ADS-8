@@ -14,7 +14,7 @@ void makeTree(BST<std::string>& tree, const char* filename) {
     }
 
     std::string current_word = "";
-    
+
     while (!file.eof()) {
         int ch = file.get();
         if (ch == EOF) break;
@@ -31,7 +31,7 @@ void makeTree(BST<std::string>& tree, const char* filename) {
             }
         }
     }
-    
+
     if (!current_word.empty()) {
         tree.insert(current_word);
     }
@@ -39,10 +39,10 @@ void makeTree(BST<std::string>& tree, const char* filename) {
     file.close();
 }
 
-void traverse(BST<std::string>::Node* node, std::vector<BST<std::string>::Node*>& nodes) {
+void traverse(BST<std::string>::Node* node, std::vector<BST<std::string>::Node*>* nodes) {
     if (node == nullptr) return;
     traverse(node->left, nodes);
-    nodes.push_back(node);
+    nodes->push_back(node);
     traverse(node->right, nodes);
 }
 
@@ -52,8 +52,8 @@ bool compareNodes(BST<std::string>::Node* a, BST<std::string>::Node* b) {
 
 void printFreq(BST<std::string>& tree) {
     std::vector<BST<std::string>::Node*> nodes;
-    
-    traverse(tree.getRoot(), nodes);
+
+    traverse(tree.getRoot(), &nodes);
 
     std::sort(nodes.begin(), nodes.end(), compareNodes);
 
