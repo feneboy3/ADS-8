@@ -9,7 +9,6 @@
 void makeTree(BST<std::string>& tree, const char* filename) {
     std::ifstream file(filename);
     if (!file) {
-        std::cout << "File error!" << std::endl;
         return;
     }
 
@@ -59,9 +58,6 @@ void printFreq(BST<std::string>& tree) {
     std::sort(nodes.begin(), nodes.end(), compareNodes);
 
     std::ofstream out("result/freq.txt");
-    if (!out) {
-        std::cout << "Error opening result/freq.txt!" << std::endl;
-    }
 
     for (size_t i = 0; i < nodes.size(); ++i) {
         std::cout << nodes[i]->value << " " << nodes[i]->count << std::endl;
