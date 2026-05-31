@@ -8,9 +8,21 @@
 
 void makeTree(BST<std::string>& tree, const char* filename) {
     std::ifstream file(filename);
+    
     if (!file) {
-        return;
+        file.clear();
+        file.open(std::string("../") + std::string(filename));
     }
+    if (!file) {
+        file.clear();
+        file.open(std::string("../../") + std::string(filename));
+    }
+    if (!file) {
+        file.clear();
+        file.open(std::string("../../../") + std::string(filename));
+    }
+
+    if (!file) return;
 
     std::string current_word = "";
 
